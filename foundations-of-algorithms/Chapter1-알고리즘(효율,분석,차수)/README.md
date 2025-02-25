@@ -60,8 +60,8 @@ void binsearch(int n, const keytype S[], keytype x, index& location)
 
 $$
 \begin{aligned}
-f_0 &= 0\\
-f_1 &= 1\\
+f_0 &= 0,\\
+f_1 &= 1,\\
 f_n &= f_{n-1} + f_{n-2}
 \end{aligned}
 $$
