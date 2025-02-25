@@ -59,11 +59,11 @@ void binsearch(int n, const keytype S[], keytype x, index& location)
 <div align="center">
 
 $$
-f_0 = 0\\
-
-f_1 = 1\\
-
-f_n = f_{n-1} + f_{n-2}
+\begin{aligned}
+f_0 &= 0\\
+f_1 &= 1\\
+f_n &= f_{n-1} + f_{n-2}
+\end{aligned}
 $$
 
 </div>
