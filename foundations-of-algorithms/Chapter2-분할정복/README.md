@@ -58,9 +58,51 @@ void merge(int h, int m, U[], V[], S[])
 합병정렬 알고리즘은 정렬 과정에서 2n개 정도의 배열이 추가적으로 만들어진다.  
 이것을 개선하여 n개의 원소를 가진 배열 하나만 필요한 알고리즘을 만들 수도 있다.
 ~~~cpp
+void mergesort2 (index low, index high)
+{
+    index mid;
 
+    if (low < high) {
+        mid = 내림((low + high) / 2);
+        mergesort2(low, mid);
+        mergesort2(mid+1, high);
+
+        merge2(low, mid, high);
+    }
+}
+
+void merge2 (index low, index mid, index high)
+{
+    index i, j, k;
+    U[low ~ high]; // 새로 만든 n개의 원소를 가진 배열(합병에 필요한 지역 배열)
+    i = low; j = mid + 1; k = low;
+
+    while (i <= mid && j <= high) {
+        if (S[i] < S[j]) {
+            U[k] = S[i];
+            i++;
+        }
+        else {
+            U[k] = S[j];
+            j++;
+        }
+        k++;
+    }
+    if (i > mid) // i가 mid보다 크면 j~high가 남아있는 것이므로
+        U[k ~ high] = S[j ~ high]; // j~high를 U[]에 추가
+    else
+        U[k ~ high] = S[i ~ mid];// 반대의 경우
+    S[low ~ high] = U[low ~ high]; // 정렬된 U를 S로 대체
+}
 ~~~
 ## 2.3 분할정복 설계방법
+분할정복 설계 절차
+~~~
+1. 문제의 입력사례를 하나 이상의 작은 입력사례로 분할한다.
+2. 작은 입력사례들을 각각 정복한다(푼다). 작은 입력사례가 충분히 작지 않으면 재귀 호출한다.
+3. 필요하다면, 작은 입력사례의 해답을 통합하여 원래 입력사례의 해답을 구한다.
+~~~
+3번에서 필요하다면을 붙인 이유는 이분검색과 같은 알고리즘처럼 해답을 통합할 필요가 없는 경우도 있기 때문이다.
 ## 2.4 빠른정렬(분할교환정렬)
 ## 2.5 쉬트라센의 행렬곱셈 알고리즘
 ## 2.6 큰 정수 계산법
