@@ -104,7 +104,62 @@ void merge2 (index low, index mid, index high)
 ~~~
 3번에서 필요하다면을 붙인 이유는 이분검색과 같은 알고리즘처럼 해답을 통합할 필요가 없는 경우도 있기 때문이다.
 ## 2.4 빠른정렬(분할교환정렬)
+Quicksort는 합병정렬과 비슷하지만 배열을 분할하는 방식이 다르다.  
+pivot 원소를 설정하여 pivot보다 작은 원소는 왼쪽으로, 크거나 같은 원소는 오른쪽으로 분할한다.  
+피벗을 고르는 법도 효율성에 큰 영향을 끼치지만 편의상 배열의 첫번째 원소를 피벗으로 정하는 알고리즘을 짜보자.
+~~~cpp
+void quicksort (index low, index high)
+{
+    index pivotpoint;
+
+    if (high > low) {
+        partition (low, high, pivotpoint);
+        quicksort (low, pivotpoint - 1);
+        quicksort (pivotpoint + 1, high);
+    }
+}
+
+void partition (index low, index high, index& pivotpoint) {
+    index i, j;
+    keytype pivotitem;
+
+    pivotitem = S[low];
+    j = low;
+    for (i = low + 1; i < = high; i++) {
+        if (S[i] < pivotitem) {
+            j++;
+            S[i]와 S[j] 교체;
+        }
+    }
+    pivotpoint = j;
+    S[low]와 S[pivotpoint] 교체
+}
+~~~
+quicksort의 최악 시간복잡도는 $O(n^2)$이고 평균 시간복잡도는 $nlogn$이다.
 ## 2.5 쉬트라센의 행렬곱셈 알고리즘
+쉬트라센의 행렬곱셈 방법은 다음과 같다.
+$$\begin{array}{l}
+\boxed{
+\begin{aligned}
+m_1 &= (a_{11} + a_{22})(b_{11} + b_{22}) \\
+m_2 &= (a_{21} + a_{22})b_{11} \\
+m_3 &= a_{11}(b_{12} - b_{22}) \\
+m_4 &= a_{22}(b_{21} - b_{11}) \\
+m_5 &= (a_{11} + a_{12})b_{22} \\
+m_6 &= (a_{21} - a_{11})(b_{11} + b_{12}) \\
+m_7 &= (a_{12} - a_{22})(b_{21} + b_{22}) \\
+\\
+C &= \begin{bmatrix} 
+m_1 + m_4 - m_5 + m_7 & m_3 + m_5 \\
+m_2 + m_4 & m_1 + m_3 - m_2 + m_6
+\end{bmatrix}
+\end{aligned}
+}
+\end{array}$$
+이 방법은 4개의 부분행렬로 나눌 수 있는 큰 행렬에도 똑같이 적용할 수 있어서 분할정복이 가능하게 해준다.
+기존의 행렬곱셈 알고리즘이 $O(n^3)$의 시간복잡도를 가지고있는데 반해 쉬트라센 알고리즘은 $O(n^{2.81})$의 시간복잡도를 가지고 있다.
+
+행렬곱셈 알고리즘은 최소한 2차시간은 되어야함이 증명돼있지만 2차시간 알고리즘은 아직 개발되지 않았고 2차시간 알고리즘의 개발이 불가능하다는 것도 증명되지 않아 가능한지 알 수 없다.
 ## 2.6 큰 정수 계산법
 ### 2.6.1 큰 정수 표현: 덧셈과 기타 1차시간 연산
 ### 2.6.2 큰 정수 곱셈
