@@ -23,7 +23,7 @@ $$
 \binom{n}{k} =
 \begin{cases}
 \binom{n-1}{k-1}+\binom{n-1}{k}, & 0 < k < n, \\
-\quad \quad \:\:\:1\quad \quad \:\:,  & k=0\quad 또는\quad k=n
+\quad \quad \ \ \ 1\quad \quad \ \ ,  & k=0\quad 또는\quad k=n
 \end{cases}
 $$
 
@@ -44,7 +44,7 @@ int bin2(int n, int k)
     int B[0~n][0~k];
 
     for(i = 0; i <= n; i++) {
-        
+
     }
 }
 ~~~
