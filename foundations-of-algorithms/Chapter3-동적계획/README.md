@@ -163,6 +163,7 @@ void path(index q,r)
 대표적으로 최장 경로를 찾는 문제에서는 최적의 원칙이 성립하지 않는다.  
 A→B→C→D→E가 최장 경로라도, C→D→E가 C에서 E까지의 최장 경로라는 보장은 없다.
 ## 3.4 연쇄 행렬곱셈
+다음은 $2\times 3$ 행렬과 $3\times 4$ 행렬의 곱셈 결과이다.
 $$
 \begin{bmatrix}
 1 & 2 & 3 \\
@@ -178,6 +179,59 @@ $$
 74 & 89 & 104 & 83
 \end{bmatrix}
 $$
+계산 결과는 $2\times 4$ 행렬이 된다. 행렬 곱셈 정의에 따라 계산해보면, 위와 같은 행렬 곱셈시에 필요한 곱셈의 시행 횟수는 $2\times 3\times 4 = 24$ 이다.  
+$i\times j$ 행렬과 $j\times k$ 행렬 곱셈에 필요한 곱셈 횟수는 $i\times j\times k$번 이다.
+
+$$
+\begin{aligned}
+&A\times B\times C\times D
+\end{aligned}
+$$
+이렇게 여러 행렬을 곱해야 할 때, 곱하는 순서에 따라 곱셈 횟수를 줄일 수 있다. 가장 적은 곱셈이 필요한 순서를 찾으면 효율적으로 계산할 수 있을 것이다.  
+
+행렬의 곱셈 순서를 찾는 문제는 최적의 원칙이 성립하므로 동적계획을 적용할 수 있다.
+행렬 $i$부터 행렬 $j$까지 곱하는데 필요한 곱셈의 최소 횟수를 저장하는 배열 $M[i][j]$라고 하면
+$$
+\begin{aligned}
+&M[i][j] = min(M[i][k] + M[k+1][j] + d_{i-1}d_kd_j), && 만약\quad i<j\\
+&M[i][i] = 0
+\end{aligned}
+$$
+이러한 수식으로 나타낼 수 있다.
+~~~cpp
+int minmult (int n, const int d[], index P[][])
+{
+    index i, j, k, diagonal;
+    int M[1~n][1~n];
+
+    for (i = 1; i <= n; i++) {
+        M[i][i] = 0;
+    }
+    for(diagonal = 1; diagonal <= n-1; diagonal++) {
+        for(i = 1; i<= n-diagonal; i++) {
+            j = i + diagonal;
+            M[i][j] = (i<=k<=j-1)min(M[i][k] + M[k+1][j] + d[i-1]*d[k]*d[j]);
+            P[i][j] = 최소횟수를 나타내는 k값;
+        }
+    }
+    return M[1][n];
+}
+~~~
+$O(n^3)$의 시간복잡도를 가진다.
+~~~cpp
+void order(index i, index j) //순서를 텍스트로 출력하는 코드
+{
+    if (i==j)
+        cout << "A" << i;
+    else {
+        k = P[i][j];
+        cout << "(";
+        order(i, k);
+        order(k+1, j);
+        cout << ")";
+    }
+}
+~~~
 ## 3.5 최적 이분검색트리
 ## 3.6 외판원 문제
 ## 3.7 DNA 서열 정렬
