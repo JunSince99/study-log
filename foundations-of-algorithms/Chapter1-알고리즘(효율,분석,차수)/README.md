@@ -63,8 +63,6 @@ void binsearch(int n, const keytype S[], keytype x, index& location)
 하지만 40억 번의 검색 횟수도 컴퓨터의 발전으로 몇 초 정도 밖에 걸리지 않아 알고리즘의 중요성이 크게 부각되지 않을 수 있다. 이번에는 피보나치 수열의 경우를 살펴보자.
 ### 1.2.2 피보나치 수열
 피보나치 수열은 다음과 같이 정의된다.
-<div align="center">
-
 $$
 \begin{aligned}
 f_0 &= 0,\\
@@ -73,7 +71,6 @@ f_n &= f_{n-1} + f_{n-2}
 \end{aligned}
 $$
 
-</div>
 피보나치 수열을 간단히 재귀로 구현하면
 
 ~~~cpp

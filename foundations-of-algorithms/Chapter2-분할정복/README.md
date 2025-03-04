@@ -244,8 +244,8 @@ $$
 위 처럼 세번만 곱셈해도 (재귀호출 해도)
 $$
 \begin{aligned}
-xw, yz \\
-(x+y)(w+z) - xw - yz = (xz+yw)
+&xw, yz \\
+&(x+y)(w+z) - xw - yz = (xz+yw)
 \end{aligned}
 $$
 이렇게 필요한 값을 모두 얻을 수 있다는 것을 확인할 수 있다.
